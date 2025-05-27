@@ -1,0 +1,237 @@
+@charset "utf-8";
+
+:root {
+	/* Layout */
+	--content-max-width: 100%;
+	--container-padding: 0;
+	--header-height: 100px;
+	
+	/* Spacing */
+	--text-padding: 20px;
+	--margin-xl: 100px;
+	--margin-lg: 60px;
+	--margin-md: 40px;
+	--margin-sm: 30px;
+	--arrow-size: 40px;
+	--arrow-spacing: 20px;
+	
+	/* Typography */
+	--font-size-base: 16px;
+	--font-size-lg: 24px;
+	--font-size-md: 20px;
+	--font-size-sm: 18px;
+	--font-size-xs: 14px;
+	--line-height: 1.6;
+	
+	/* Colors */
+	--bg-color: #fff;
+	--text-color: #000;
+	--arrow-bg: rgba(0, 0, 0, 0.5);
+	--arrow-bg-hover: rgba(0, 0, 0, 0.8);
+	--arrow-color: white;
+	
+	/* Effects */
+	--border-radius-sm: 5px;
+	--border-radius-md: 8px;
+	--border-radius-circle: 50%;
+	--box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	--transition-speed: 0.3s;
+	--transition-timing: ease;
+	
+	/* Z-index */
+	--z-arrow: 2;
+}
+
+/* Base Styles */
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: var(--bg-color);
+}
+
+img {
+	border-radius: var(--border-radius-sm);
+}
+
+/* Carousel Container */
+.contenedor-carrusel {
+	position: relative;
+	max-width: var(--content-max-width);
+	margin: var(--margin-xl) auto;
+	overflow: visible;
+	padding: 0 var(--container-padding);
+}
+
+/* Navigation Arrows */
+.flecha-izquierda,
+.flecha-derecha {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: var(--font-size-lg);
+	color: var(--arrow-color);
+	padding: 10px;
+	cursor: pointer;
+	display: none;
+	z-index: var(--z-arrow);
+	background-color: var(--arrow-bg);
+	border-radius: var(--border-radius-circle);
+	width: var(--arrow-size);
+	height: var(--arrow-size);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color var(--transition-speed) var(--transition-timing);
+}
+
+.flecha-izquierda:hover,
+.flecha-derecha:hover {
+	background-color: var(--arrow-bg-hover);
+}
+
+.flecha-izquierda {
+	left: var(--arrow-spacing);
+}
+
+.flecha-derecha {
+	right: var(--arrow-spacing);
+}
+
+.contenedor-carrusel:hover .flecha-izquierda,
+.contenedor-carrusel:hover .flecha-derecha {
+	display: block;
+}
+
+/* Carousel Images */
+.imagen-carrusel {
+	width: 100%;
+	height: auto;
+	display: none;
+	border-radius: var(--border-radius-md);
+	box-shadow: var(--box-shadow);
+}
+
+.imagen-carrusel.mostrando {
+	display: block;
+}
+
+/* Typography */
+p {
+	text-align: center;
+	padding: 20px 0 40px;
+	max-width: var(--content-max-width);
+	margin: 0 auto;
+	line-height: var(--line-height);
+	font-size: var(--font-size-base);
+}
+
+h1 {
+	text-align: center;
+	padding: 20px 0 0;
+	max-width: var(--content-max-width);
+	margin: 0 auto;
+	font-size: var(--font-size-lg);
+}
+
+h2 {
+	text-align: center;
+	padding: 0 0 20px;
+	max-width: var(--content-max-width);
+	margin: 0 auto;
+	font-size: var(--font-size-md);
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 1500px) {
+	:root {
+		--content-max-width: 90%;
+		--text-padding: 20px;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	:root {
+		--text-padding: 20px;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	:root {
+		--text-padding: 20px;
+	}
+
+	#imagen-grande img {
+		width: 100%;
+		margin: 0;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	:root {
+		--header-height: 80px;
+		--text-padding: 20px;
+		--margin-xl: 60px;
+		--arrow-size: 35px;
+		--font-size-lg: 20px;
+	}
+
+	.imagengrande.show {
+		margin-top: var(--margin-sm);
+	}
+
+	#imagen-grande img {
+		width: 100%;
+		margin: 0;
+	}
+
+	.contenedor-carrusel {
+		margin-top: var(--margin-xl);
+	}
+}
+
+@media screen and (max-width: 480px) {
+	:root {
+		--header-height: 80px;
+		--text-padding: 20px;
+		--container-padding: 15px;
+		--margin-xl: 40px;
+		--arrow-size: 30px;
+		--font-size-lg: 24px;
+		--font-size-md: 18px;
+		--font-size-base: 14px;
+	}
+
+	.contenedor-carrusel {
+		margin-top: var(--margin-xl);
+	}
+}
+
+@media screen and (max-width: 414px) {
+	:root {
+		--margin-xl: 50px;
+	}
+
+	.contenedor-carrusel {
+		margin: var(--margin-xl) auto var(--margin-xl);
+	}
+}
+
+@media screen and (max-width: 375px) {
+	:root {
+		--text-padding: 20px;
+		--arrow-size: 25px;
+		--font-size-lg: 20px;
+		--font-size-md: 16px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	:root {
+		--text-padding: 20px;
+		--arrow-size: 25px;
+		--font-size-lg: 18px;
+		--font-size-md: 14px;
+	}
+}

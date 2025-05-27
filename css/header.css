@@ -1,0 +1,355 @@
+@charset "utf-8";
+
+/* CSS Document */
+:root {
+	/* Layout */
+	--header-height: 100px;
+	--content-max-width: 1200px;
+	--submenu-width: 200px;
+	--logo-width: 200px;
+	
+	/* Spacing */
+	--container-padding: 0;
+	--text-padding: 20px;
+	--menu-gap: 30px;
+	--menu-padding: 10px;
+	--submenu-padding: 10px;
+	--submenu-item-padding: 8px 20px;
+	--mobile-menu-padding: 15px 20px;
+	--hamburger-left: 20px;
+	
+	/* Typography */
+	--font-size-base: 16px;
+	--font-size-mobile: 14px;
+	--font-size-hamburger: 1.5em;
+	
+	/* Colors */
+	--bg-color: #fff;
+	--bg-hover: #f5f5f5;
+	--bg-mobile-submenu: #f8f8f8;
+	--bg-page: #f0f0f0;
+	--text-color: #000;
+	--border-color: #eee;
+	
+	/* Effects */
+	--border-radius: 5px;
+	--box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+	--transition-speed: 0.3s;
+	--transition-timing: ease;
+	
+	/* Z-index */
+	--z-hamburger: 1001;
+	--z-submenu: 1000;
+	--z-mobile-menu: 999;
+}
+
+/* Estilos base */
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	padding-top: var(--header-height);
+	min-height: 100vh;
+	background-color: var(--bg-page);
+	overflow-x: hidden;
+}
+
+/* Header styles */
+body > header {
+	background-color: var(--bg-color) !important;
+	width: 100%;
+	padding: 0;
+	height: var(--header-height);
+	z-index: 3;
+	position: fixed;
+	top: 0;
+	left: 0;
+	margin: 0 !important;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	box-shadow: var(--box-shadow);
+}
+
+body > header > div:first-child {
+	position: absolute;
+	left: var(--hamburger-left);
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+body > header > div:last-child {
+	width: var(--content-max-width);
+	max-width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 var(--text-padding) !important;
+	box-sizing: border-box;
+	margin: 0 auto !important;
+}
+
+body > header img {
+	width: var(--logo-width);
+	height: auto;
+	margin: 0;
+	transition: width var(--transition-speed) var(--transition-timing);
+}
+
+img {
+	border-radius: var(--border-radius);
+}
+
+a {
+	-webkit-tap-highlight-color: transparent;
+	text-decoration: none;
+	color: var(--text-color);
+}
+
+/* Estilos del menú */
+.menu,
+.menu ul,
+.menu li,
+.submenu,
+.submenu ul,
+.submenu li,
+.submenu-content,
+.submenu-content ul,
+.submenu-content li,
+.submenu-elements {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+body > header nav {
+	margin-right: auto;
+}
+
+/* Estilos base del menú - visible en desktop, oculto en móvil */
+body > header nav .menu {
+	display: flex;
+	align-items: center;
+	gap: var(--menu-gap);
+}
+
+body > header .menu li {
+	position: relative;
+}
+
+/* Estilos comunes para enlaces y botones del menú */
+body > header .menu a,
+body > header .menu .submenu-button {
+	padding: var(--menu-padding);
+	display: block;
+	font-size: var(--font-size-base);
+	transition: color var(--transition-speed) var(--transition-timing);
+	color: var(--text-color);
+	text-decoration: none;
+	background: none;
+	border: none;
+	font-family: inherit;
+	text-align: left;
+	cursor: pointer;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+/* Estilos del submenu */
+.submenu {
+	position: relative;
+}
+
+/* Estilos específicos del botón Tienda - heredar estilos de los enlaces */
+.submenu-button {
+	width: 100%;
+}
+
+/* Eliminar la flecha del botón */
+.submenu-button::after {
+	display: none;
+}
+
+.submenu-content {
+	display: none;
+	position: absolute;
+	min-width: var(--submenu-width);
+	background-color: var(--bg-color);
+	padding: var(--submenu-padding) 0;
+	box-shadow: var(--box-shadow);
+	border-radius: var(--border-radius);
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: var(--z-submenu);
+}
+
+.submenu-content a {
+	display: block;
+	padding: var(--submenu-item-padding);
+	color: var(--text-color);
+	text-decoration: none;
+	white-space: nowrap;
+	transition: background-color var(--transition-speed) var(--transition-timing);
+}
+
+.submenu-content a:hover {
+	background-color: var(--bg-hover);
+}
+
+/* Mostrar submenu en hover para desktop */
+@media screen and (min-width: 769px) {
+	.submenu:hover .submenu-content {
+		display: block;
+	}
+}
+
+/* Estilos del botón de hamburguesa */
+.menu-container {
+	position: absolute;
+	left: var(--hamburger-left);
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: var(--z-hamburger);
+	display: none; /* Oculto por defecto */
+}
+
+.menu-toggle {
+	cursor: pointer;
+	font-size: var(--font-size-hamburger);
+	padding: var(--menu-padding);
+	background: none;
+	border: none;
+	color: var(--text-color);
+	-webkit-tap-highlight-color: transparent;
+	display: block; /* Siempre mostrar el botón cuando el contenedor es visible */
+}
+
+/* Breakpoints responsivos */
+@media screen and (max-width: 1200px) {
+	:root {
+		--logo-width: 180px;
+		--content-max-width: 100%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	:root {
+		--header-height: 80px;
+		--logo-width: 150px;
+	}
+
+	body > header > div:first-child {
+		left: 15px;
+	}
+
+	body > header > div:last-child {
+		padding: 0 15px;
+	}
+
+	body > header nav {
+		margin-right: 0;
+	}
+
+	.articulo-container {
+		margin-top: var(--header-height);
+		margin-bottom: var(--text-padding);
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0 20px;
+	}
+
+	/* Mostrar contenedor del botón hamburguesa en móvil */
+	.menu-container {
+		display: block !important;
+	}
+
+	/* Ocultar menú por defecto en móvil */
+	body > header nav .menu {
+		display: none !important;
+		position: fixed;
+		top: var(--header-height);
+		left: 0;
+		width: 100%;
+		background-color: var(--bg-color);
+		flex-direction: column;
+		padding: var(--text-padding) 0;
+		box-shadow: var(--box-shadow);
+		z-index: var(--z-mobile-menu);
+		margin: 0;
+		max-height: calc(100vh - var(--header-height));
+		overflow-y: auto;
+	}
+
+	/* Mostrar menú solo cuando tiene la clase show */
+	body > header nav .menu.show {
+		display: flex !important;
+	}
+
+	/* Resto de estilos móviles */
+	body > header nav .menu li {
+		width: 100%;
+		text-align: left;
+	}
+
+	/* Aplicar los mismos estilos a todos los elementos del menú en móvil */
+	body > header nav .menu a,
+	body > header nav .menu .submenu-button {
+		padding: var(--mobile-menu-padding) !important;
+		width: 100%;
+	}
+
+	/* Estilos específicos para submenu en móvil */
+	.submenu-content {
+		position: static;
+		width: 100%;
+		background-color: var(--bg-mobile-submenu);
+		padding: 0;
+		box-shadow: none;
+		transform: none;
+		border-radius: 0;
+	}
+
+	.submenu.active .submenu-content {
+		display: block;
+	}
+
+	.submenu-content a {
+		padding: var(--mobile-menu-padding);
+		border-bottom: 1px solid var(--border-color);
+		font-size: var(--font-size-mobile);
+	}
+
+	.submenu-content a:last-child {
+		border-bottom: none;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	:root {
+		--logo-width: 120px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	:root {
+		--logo-width: 100px;
+	}
+}
+
+#menu-toggle {
+	display: none;
+}
+
+/* Ajustar el contenido de los artículos */
+.articulo-container {
+	width: var(--content-max-width);
+	max-width: 100%;
+	margin-top: var(--header-height);
+	margin-bottom: var(--text-padding);
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 20px;
+	box-sizing: border-box;
+}
